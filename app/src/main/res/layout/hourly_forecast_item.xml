@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+    android:layout_width="100dp"
+    android:layout_height="120dp">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="13dp"
+            android:text="Bây giờ"
+            android:textAlignment="center"
+            ></TextView>
+
+        <TextView
+            android:id="@+id/tv_temp"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/tv_time"
+            android:layout_centerHorizontal="true"
+            android:text="32"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="20dp"></TextView>
+
+        <TextView
+            android:id="@+id/tv_temp2"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/tv_time"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="textEnd"
+            android:text="°C"
+            android:textColor="@color/black"
+            android:textSize="15dp"></TextView>
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_temp"></ImageView>
+        <TextView
+            android:id="@+id/tv_wind"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/icon"
+            android:textSize="13dp"
+            android:text="9.3km/h"
+            android:textAlignment="center"
+            ></TextView>
+    </RelativeLayout>
+    </layout>
