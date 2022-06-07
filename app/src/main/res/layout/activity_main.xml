@@ -5,10 +5,71 @@
     tools:context=".MainActivity" >
     <data>
         <variable
-            name="weatherCurrent"
+            name="temp_curent"
             type="com.midterm.weatherapp.model.WeatherCurrent" />
+
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></RelativeLayout>
+
+        android:layout_height="match_parent"
+        android:background="@drawable/lockscreens"
+        >
+
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="140dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:text="@{(String.valueOf(temp_curent.getTemperature().getTempInt()))}"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="100dp"
+
+            ></TextView>
+
+        <TextView
+            android:id="@+id/temp2"
+            android:layout_width="160dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:text="ºC"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textSize="20dp"></TextView>
+
+
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/temp"
+            android:layout_centerHorizontal="true"
+            android:text="@{`Max Temp : `+(String.valueOf(temp_curent.getTemperature().getTempMax()))+`ºC`}"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+
+            android:textSize="15dp"></TextView>
+
+        <Button
+            android:id="@+id/button_add"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/ic_baseline_add_24"
+
+            />
+
+        <Button
+            android:id="@+id/button_more"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="3dp"
+            android:background="@drawable/ic_baseline_more_vert_24" />
+
+    </RelativeLayout>
+
+
 </layout>
