@@ -29,28 +29,32 @@ public class Temperature {
         return temp;
     }
 
+    public int getTempInt(){
+        return (int)temp;
+    }
+
     public void setTemp(double temp) {
         this.temp = temp;
     }
 
-    public double getFeelsLike() {
-        return feelsLike;
+    public int getFeelsLike() {
+        return (int)feelsLike;
     }
 
     public void setFeelsLike(double feelsLike) {
         this.feelsLike = feelsLike;
     }
 
-    public double getTempMin() {
-        return tempMin;
+    public int getTempMin() {
+        return (int)tempMin;
     }
 
     public void setTempMin(double tempMin) {
         this.tempMin = tempMin;
     }
 
-    public double getTempMax() {
-        return tempMax;
+    public int getTempMax() {
+        return (int)tempMax;
     }
 
     public void setTempMax(double tempMax) {
