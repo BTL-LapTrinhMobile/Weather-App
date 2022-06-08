@@ -88,6 +88,13 @@
             android:layout_width="0dp"
             android:layout_height="5dp" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_hourly_forecast"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="264dp"
+            android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
 
 
