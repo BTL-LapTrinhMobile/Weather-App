@@ -3,12 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/ITstd/HK_6/LaptrinhMobile/BTL_Final/Weather-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.142" />
-        <entry key="..\:/ITstd/HK_6/LaptrinhMobile/BTL_Final/Weather-App/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1665" />
-        <entry key="..\:/ITstd/HK_6/LaptrinhMobile/BTL_Final/Weather-App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.142" />
-        <entry key="..\:/ITstd/HK_6/LaptrinhMobile/BTL_Final/Weather-App/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/ITstd/HK_6/LaptrinhMobile/BTL_Final/Weather-App/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.142" />
         <entry key="..\:/Users/Vinh/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Vinh/AndroidStudioProjects/WeatherApp/app/src/main/res/layout/hourly_forecast_item.xml" value="0.1" />
       </map>
     </option>
   </component>
