@@ -55,18 +55,17 @@ public class MainActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<WeatherHourlyForecastList>() {
-                    @Override
 
                     public void onSuccess(@NonNull WeatherCurrent weatherCurrent) {
-                        Log.e("DEBUG", weatherCurrent.getTemperature().toString()+"");
-                        Log.e("DEBUG", weatherCurrent.getWind().toString()+"");
-                        Log.e("DEBUG", weatherCurrent.getWeatherPreview().toString()+"");
+                        Log.e("DEBUG", weatherCurrent.getTemperature().toString() + "");
+                        Log.e("DEBUG", weatherCurrent.getWind().toString() + "");
+                        Log.e("DEBUG", weatherCurrent.getWeatherPreview().toString() + "");
 
-                       binding.setTempCurent(weatherCurrent);
+                    }
+
+                    @Override
                     public void onSuccess(@NonNull WeatherHourlyForecastList weatherHourlyForecastList) {
                         Log.e("DEBUG", weatherHourlyForecastList.getWeatherHourlyForecastList().get(0).toString()+"");
-
-
                     }
 
                     @Override
