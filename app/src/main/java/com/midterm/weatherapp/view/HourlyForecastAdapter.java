@@ -33,7 +33,7 @@ public class HourlyForecastAdapter extends RecyclerView.Adapter<HourlyForecastAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         WeatherHourlyForecast whf = weatherHourlyForecastList.get(position);
-        holder.textViewTemp.setText(String.valueOf(whf.getTemperature().getTemp()));
+        holder.textViewTemp.setText(String.valueOf(whf.getTemperature().getTempInt()));
         holder.textViewTime.setText(whf.getTime().substring(11,16));
         holder.textViewWind.setText(String.valueOf(whf.getWind().getSpeed())+"km/h");
         String url = "http://openweathermap.org/img/wn/"+whf.getWeatherPreviewList().get(0).getIcon()+".png";

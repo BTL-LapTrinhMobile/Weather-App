@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("DEBUG", weatherCurrent.getWind().toString()+"");
                         Log.e("DEBUG", weatherCurrent.getWeatherPreview().toString()+"");
 
-//                        binding.setWeatherCurrent(weatherCurrent);
+                        binding.setTempCurent(weatherCurrent);
                     }
 
                     @Override
