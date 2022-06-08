@@ -2,6 +2,7 @@ package com.midterm.weatherapp.viewmodel;
 
 import com.midterm.weatherapp.model.Temperature;
 import com.midterm.weatherapp.model.WeatherCurrent;
+import com.midterm.weatherapp.model.WeatherHourlyForecastList;
 
 import java.util.List;
 
@@ -12,8 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiService {
     private static final String BASE_URL="https://api.openweathermap.org";
+    private static final String PRO_URL ="https://pro.openweathermap.org";
     private WeatherCurrentApi api;
-
+    private WeatherHourlyForecastApi forecastApi;
     public ApiService()
     {
         api = new Retrofit.Builder()
@@ -22,11 +24,25 @@ public class ApiService {
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build()
                 .create(WeatherCurrentApi.class);
+
+        forecastApi = new Retrofit.Builder()
+                .baseUrl(PRO_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .build()
+                .create(WeatherHourlyForecastApi.class);
     }
 
     public Single<WeatherCurrent> getWeatherCurrent()
     {
         return api.getWeatherCurrent();
     }
+
+    public Single<WeatherHourlyForecastList> getWeatherHourlyForecastList()
+    {
+        return forecastApi.getWeatherHourlyForecastList();
+    }
+
+
 
 }

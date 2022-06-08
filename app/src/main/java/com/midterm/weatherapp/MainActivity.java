@@ -9,6 +9,7 @@ import android.util.Log;
 import com.midterm.weatherapp.databinding.ActivityMainBinding;
 import com.midterm.weatherapp.model.Temperature;
 import com.midterm.weatherapp.model.WeatherCurrent;
+import com.midterm.weatherapp.model.WeatherHourlyForecastList;
 import com.midterm.weatherapp.viewmodel.ApiService;
 
 import java.util.ArrayList;
@@ -32,17 +33,40 @@ public class MainActivity extends AppCompatActivity {
 
         temperatureList = new ArrayList<>();
         apiService = new ApiService();
-        apiService.getWeatherCurrent()
+//        apiService.getWeatherCurrent()
+//                .subscribeOn(Schedulers.newThread())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeWith(new DisposableSingleObserver<WeatherCurrent>() {
+//                    @Override
+//                    public void onSuccess(@NonNull WeatherCurrent weatherCurrent) {
+//                        Log.e("DEBUG", weatherCurrent.getTemperature().toString()+"");
+//                        Log.e("DEBUG", weatherCurrent.getWind().toString()+"");
+//                        Log.e("DEBUG", weatherCurrent.getWeatherPreview().toString()+"");
+//
+//                        binding.setWeatherCurrent(weatherCurrent);
+//                    }
+//
+//                    @Override
+//                    public void onError(@NonNull Throwable e) {
+//                        Log.e("DEBUG", e.toString());
+//                    }
+//                });
+        apiService.getWeatherHourlyForecastList()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<WeatherCurrent>() {
+                .subscribeWith(new DisposableSingleObserver<WeatherHourlyForecastList>() {
                     @Override
+
                     public void onSuccess(@NonNull WeatherCurrent weatherCurrent) {
                         Log.e("DEBUG", weatherCurrent.getTemperature().toString()+"");
                         Log.e("DEBUG", weatherCurrent.getWind().toString()+"");
                         Log.e("DEBUG", weatherCurrent.getWeatherPreview().toString()+"");
 
                        binding.setTempCurent(weatherCurrent);
+                    public void onSuccess(@NonNull WeatherHourlyForecastList weatherHourlyForecastList) {
+                        Log.e("DEBUG", weatherHourlyForecastList.getWeatherHourlyForecastList().get(0).toString()+"");
+
+
                     }
 
                     @Override
@@ -50,6 +74,5 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("DEBUG", e.toString());
                     }
                 });
-
     }
 }
