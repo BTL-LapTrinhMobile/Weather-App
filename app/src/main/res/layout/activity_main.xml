@@ -3,15 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity" >
-<!--    <data>-->
-<!--        <variable-->
-<!--            name="weatherCurrent"-->
-<!--            type="com.midterm.weatherapp.model.WeatherCurrent" />-->
+    <data>
+        <variable
+            name="temp_curent"
+            type="com.midterm.weatherapp.model.WeatherCurrent" />
 
-<!--    </data>-->
+    </data>
     <RelativeLayout
         android:layout_width="match_parent"
-
         android:layout_height="match_parent"
         android:background="@drawable/lockscreens"
         >
@@ -22,6 +21,7 @@
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
+            android:text="@{(String.valueOf(temp_curent.getTemperature().getTempInt()))}"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="100dp"
@@ -46,34 +46,48 @@
             android:layout_height="60dp"
             android:layout_below="@+id/temp"
             android:layout_centerHorizontal="true"
-            android:text="@{`Max Temp : `+`ºC`}"
+            android:text="@{`Max Temp : `+(String.valueOf(temp_curent.getTemperature().getTempMax()))+`ºC`}"
             android:textColor="@color/white"
             android:textAlignment="center"
 
             android:textSize="15dp"></TextView>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_add"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/ic_baseline_add_24"
 
             />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_more"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="3dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+
+
             android:background="@drawable/ic_baseline_more_vert_24" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcv_hourly_forecast"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-            ></androidx.recyclerview.widget.RecyclerView>
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="405dp"
+            android:paddingLeft="20dp"
+            android:text="Next 5 day"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="5dp" />
+
     </RelativeLayout>
 
 
