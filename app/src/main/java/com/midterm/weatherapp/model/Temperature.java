@@ -25,7 +25,7 @@ public class Temperature {
         this.humidity = humidity;
     }
 
-    public int getTemp() {
+    public int getTempInt() {
         return (int)temp;
     }
 
