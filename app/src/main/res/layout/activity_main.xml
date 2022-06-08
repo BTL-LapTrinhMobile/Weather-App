@@ -73,11 +73,7 @@
 
             android:background="@drawable/ic_baseline_more_vert_24" />
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="@dimen/spacing_mlarge"-->
-<!--            android:orientation="vertical">-->
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -92,13 +88,6 @@
             android:layout_width="0dp"
             android:layout_height="5dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="209dp"
-            android:orientation="horizontal" />
 
     </RelativeLayout>
 </layout>
