@@ -36,7 +36,7 @@
             android:textSize="15dp"></TextView>
 
         <ImageView
-            android:id="@+id/icon"
+            android:id="@+id/iv_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_below="@+id/tv_temp"
@@ -45,7 +45,7 @@
             android:id="@+id/tv_wind"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:layout_below="@id/icon"
+            android:layout_below="@id/iv_icon"
             android:textSize="13dp"
             android:text="9.3km/h"
             android:textAlignment="center"

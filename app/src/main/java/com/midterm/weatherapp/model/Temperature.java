@@ -13,6 +13,7 @@ public class Temperature implements Serializable {
     private Value minimumTemperature;
 
     public Temperature() {
+
     }
 
     public Temperature(double value, Value maximumTemperature, Value minimumTemperature) {

@@ -2,14 +2,18 @@ package com.midterm.weatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.midterm.weatherapp.databinding.ActivityMainBinding;
+
 import com.midterm.weatherapp.model.location.Location;
 import com.midterm.weatherapp.view.MainViewPagerAdapter;
+
 import com.midterm.weatherapp.viewmodel.ApiService;
 
 import java.util.ArrayList;
@@ -26,10 +30,12 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private ApiService apiService;
     private ActivityMainBinding binding;
+
     private ArrayList<Location> locationList;
     private MainViewPagerAdapter VPAdapter;
 //    private AppDatabase appDatabase;
 //    private AppDao appDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,5 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(t.toString());
             }
         });
+
     }
 }
