@@ -2,77 +2,55 @@ package com.midterm.weatherapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Temperature {
-    @SerializedName("temp")
-    private double temp;
-    @SerializedName("feels_like")
-    private double feelsLike;
-    @SerializedName("temp_min")
-    private double tempMin;
-    @SerializedName("temp_max")
-    private double tempMax;
-    @SerializedName("humidity")
-    private int humidity;
+import java.io.Serializable;
+
+public class Temperature implements Serializable {
+    @SerializedName("Value")
+    private double value;
+    @SerializedName("Maximum")
+    private Value maximumTemperature;
+    @SerializedName("Minimum")
+    private Value minimumTemperature;
 
     public Temperature() {
     }
 
-    public Temperature(double temp, double feelsLike, double tempMin, double tempMax, int humidity) {
-        this.temp = temp;
-        this.feelsLike = feelsLike;
-        this.tempMin = tempMin;
-        this.tempMax = tempMax;
-        this.humidity = humidity;
+    public Temperature(double value, Value maximumTemperature, Value minimumTemperature) {
+        this.value = value;
+        this.maximumTemperature = maximumTemperature;
+        this.minimumTemperature = minimumTemperature;
     }
 
-    public int getTemp() {
-        return (int)temp;
+    public Value getMaximumTemperature() {
+        return maximumTemperature;
     }
 
-    public void setTemp(double temp) {
-        this.temp = temp;
+    public void setMaximumTemperature(Value maximumTemperature) {
+        this.maximumTemperature = maximumTemperature;
     }
 
-    public int getFeelsLike() {
-        return (int)feelsLike;
+    public Value getMinimumTemperature() {
+        return minimumTemperature;
     }
 
-    public void setFeelsLike(double feelsLike) {
-        this.feelsLike = feelsLike;
+    public void setMinimumTemperature(Value minimumTemperature) {
+        this.minimumTemperature = minimumTemperature;
     }
 
-    public int getTempMin() {
-        return (int)tempMin;
+    public double getValue() {
+        return value;
     }
 
-    public void setTempMin(double tempMin) {
-        this.tempMin = tempMin;
-    }
-
-    public int getTempMax() {
-        return (int)tempMax;
-    }
-
-    public void setTempMax(double tempMax) {
-        this.tempMax = tempMax;
-    }
-
-    public int getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(int humidity) {
-        this.humidity = humidity;
+    public void setValue(double value) {
+        this.value = value;
     }
 
     @Override
     public String toString() {
         return "Temperature{" +
-                "temp=" + temp +
-                ", feelsLike=" + feelsLike +
-                ", tempMin=" + tempMin +
-                ", tempMax=" + tempMax +
-                ", humidity=" + humidity +
+                "value=" + value +
+                ", maximumTemperature=" + maximumTemperature +
+                ", minimumTemperature=" + minimumTemperature +
                 '}';
     }
 }

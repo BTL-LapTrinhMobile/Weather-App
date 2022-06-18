@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.MainFragment">
+
+    <data>
+        <variable
+            name="weatherDailyForecast"
+            type="com.midterm.weatherapp.model.WeatherDailyForecast" />
+        <variable
+            name="weatherNextHour"
+            type="com.midterm.weatherapp.model.WeatherHourlyForecast" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#51A2D5">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_search_location"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/ic_baseline_search_24"
+                ></androidx.appcompat.widget.AppCompatButton>
+            <RelativeLayout
+                android:layout_width="160dp"
+                android:layout_height="150dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp"
+                android:layout_marginRight="20dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_temp"
+                    android:layout_width="100dp"
+                    android:layout_height="120dp"
+                    android:text="@{String.valueOf((int)weatherNextHour.temperature.value)}"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    android:textSize="70sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="112dp"
+                    android:layout_height="120dp"
+                    android:text="º"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_temp_max"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="14dp"
+                    android:text="@{String.valueOf((int)weatherDailyForecast.temperature.maximumTemperature.value)+`º`}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></androidx.appcompat.widget.AppCompatTextView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_temp_min"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/tv_temp_max"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="1dp"
+                    android:text="@{String.valueOf((int)weatherDailyForecast.temperature.minimumTemperature.value)+`º`}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></androidx.appcompat.widget.AppCompatTextView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="100dp"
+                    android:text="@{`cảm thấy như `+String.valueOf((int)weatherNextHour.feelTemperature.value)+`º`}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></androidx.appcompat.widget.AppCompatTextView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="↑"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/red"
+                    android:textSize="15dp"
+                    android:textStyle="bold"></androidx.appcompat.widget.AppCompatTextView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/tv_temp_max"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="1dp"
+                    android:text="↓"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/blue"
+                    android:textSize="15dp"
+                    android:textStyle="bold"></androidx.appcompat.widget.AppCompatTextView>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="200dp"
+                android:layout_height="160dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="60dp">
+
+                <ImageView
+                    android:id="@+id/im_icon"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"></ImageView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="110dp"
+                    android:text="@{weatherNextHour.iconPhrase}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></androidx.appcompat.widget.AppCompatTextView>
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_hourly_forecast"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="260dp"
+                android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="400dp"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="#2892D5">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_rain"
+                        android:layout_width="150dp"
+                        android:layout_height="25dp"
+                        android:layout_marginRight="20dp"
+                        android:text="Xác suất mưa"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/label_rain"
+                        android:text="@{(int)weatherNextHour.rainProbability+` %`}"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"></androidx.appcompat.widget.AppCompatTextView>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_wind"
+                        android:layout_width="150dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginRight="20dp"
+                        android:text="Tốc độ gió"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/label_wind"
+
+                        android:text="@{weatherNextHour.wind.speed.value+` km/h`}"
+
+                        android:textColor="@color/white"
+                        android:textSize="20dp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_UV"
+                        android:layout_width="150dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="200dp"
+                        android:layout_marginRight="20dp"
+                        android:text="Chỉ số UV"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/label_UV"
+                        android:text="@{weatherNextHour.uv}"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_hum"
+                        android:layout_width="150dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:text="Độ ẩm"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/label_hum"
+                        android:layout_alignParentRight="true"
+                        android:text="@{(int)weatherNextHour.humidity+` %`}"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"></androidx.appcompat.widget.AppCompatTextView>
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_pressure"
+                        android:layout_width="150dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="100dp"
+                        android:text="Mây"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/label_pressure"
+                        android:layout_alignParentRight="true"
+                        android:text="@{String.valueOf((int)weatherNextHour.cloudCover)+` %`}"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/label_foresight"
+                        android:layout_width="150dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="200dp"
+                        android:text="Tầm nhìn xa"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@id/label_foresight"
+                        android:layout_alignParentRight="true"
+                        android:text="@{(int)weatherNextHour.visibility.value+` km`}"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"></androidx.appcompat.widget.AppCompatTextView>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_daily_forecast_detail"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="710dp"
+                android:text="Dự báo chi tiết năm ngày"
+                android:textSize="15dp"
+                android:inputType="textMultiLine"
+                android:textColor="@color/white"></androidx.appcompat.widget.AppCompatTextView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_daily_forecast"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_marginTop="750dp"></androidx.recyclerview.widget.RecyclerView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</layout>
