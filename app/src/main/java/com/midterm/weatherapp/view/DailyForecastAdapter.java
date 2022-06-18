@@ -56,4 +56,5 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
             tvTempMin = itemView.findViewById(R.id.tv_temp_min);
         }
     }
+
 }
