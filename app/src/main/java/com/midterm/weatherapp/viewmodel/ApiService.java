@@ -1,48 +1,57 @@
 package com.midterm.weatherapp.viewmodel;
 
-import com.midterm.weatherapp.model.Temperature;
-import com.midterm.weatherapp.model.WeatherCurrent;
-import com.midterm.weatherapp.model.WeatherHourlyForecastList;
+import com.midterm.weatherapp.model.WeatherDailyForecastList;
+import com.midterm.weatherapp.model.WeatherHourlyForecast;
+import com.midterm.weatherapp.model.location.Location;
 
 import java.util.List;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.core.Single;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiService {
-    private static final String BASE_URL="https://api.openweathermap.org";
-    private static final String PRO_URL ="https://pro.openweathermap.org";
-    private WeatherCurrentApi api;
-    private WeatherHourlyForecastApi forecastApi;
+    private static final String BASE_URL="http://dataservice.accuweather.com";
+    private WeatherApi weatherApi;
+    private LocationApi locationApi;
     public ApiService()
     {
-        api = new Retrofit.Builder()
+        locationApi = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build()
-                .create(WeatherCurrentApi.class);
+                .create(LocationApi.class);
 
-        forecastApi = new Retrofit.Builder()
-                .baseUrl(PRO_URL)
+
+        weatherApi = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build()
-                .create(WeatherHourlyForecastApi.class);
+                .create(WeatherApi.class);
+
     }
 
-    public Single<WeatherCurrent> getWeatherCurrent()
+
+    public Call<List<WeatherHourlyForecast>> getWeatherHourlyForecast(String cityKey)
     {
-        return api.getWeatherCurrent();
+        return weatherApi.getWeatherHourlyForecast(cityKey);
     }
 
-    public Single<WeatherHourlyForecastList> getWeatherHourlyForecastList()
+    public Single<WeatherDailyForecastList> getWeatherDailyForecastList(String cityKey)
     {
-        return forecastApi.getWeatherHourlyForecastList();
+        return weatherApi.getWeatherDailyForecastList(cityKey);
     }
 
+    public Call<List<Location>> getLocationByName(String locationName){
+        return locationApi.getLocationByName(locationName);
+    }
 
+    public Call<Location> getLocationByLonLat(String locationLonLat){
+        return locationApi.getLocationByLonLat(locationLonLat);
+    }
 
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.SearchLocationActivity">
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edt_search_location">
+    </androidx.appcompat.widget.SearchView>
+    <ImageView
+        android:id="@+id/icon_lon_lat"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/ic_baseline_location_on_24"
+        ></ImageView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_choice_lon_lat"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="60dp"
+        android:layout_toRightOf="@+id/icon_lon_lat"
+        android:textColor="@color/black"
+        android:textAlignment="viewStart"
+        android:textSize="20dp"
+        android:text="     Use current location"></androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_search_location"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120dp"></androidx.recyclerview.widget.RecyclerView>
+</RelativeLayout>

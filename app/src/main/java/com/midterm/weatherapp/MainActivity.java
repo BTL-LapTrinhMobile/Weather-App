@@ -5,15 +5,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.midterm.weatherapp.databinding.ActivityMainBinding;
-import com.midterm.weatherapp.model.Temperature;
-import com.midterm.weatherapp.model.WeatherCurrent;
-import com.midterm.weatherapp.model.WeatherHourlyForecast;
-import com.midterm.weatherapp.model.WeatherHourlyForecastList;
-import com.midterm.weatherapp.view.HourlyForecastAdapter;
+
+import com.midterm.weatherapp.model.location.Location;
+import com.midterm.weatherapp.view.MainViewPagerAdapter;
+
 import com.midterm.weatherapp.viewmodel.ApiService;
 
 import java.util.ArrayList;
@@ -21,67 +21,60 @@ import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private ApiService apiService;
-    private ArrayList<Temperature> temperatureList;
     private ActivityMainBinding binding;
-    private HourlyForecastAdapter adapter;
-    private ArrayList<WeatherHourlyForecast> weatherHourlyForecastList;
+
+    private ArrayList<Location> locationList;
+    private MainViewPagerAdapter VPAdapter;
+//    private AppDatabase appDatabase;
+//    private AppDao appDao;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.inflate(getLayoutInflater(),R.layout.activity_main,null, false);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        weatherHourlyForecastList = new ArrayList<>();
-        adapter = new HourlyForecastAdapter(weatherHourlyForecastList);
-        binding.rcvHourlyForecast.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
-        binding.rcvHourlyForecast.setAdapter(adapter);
-
-
-        temperatureList = new ArrayList<>();
         apiService = new ApiService();
-        apiService.getWeatherCurrent()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<WeatherCurrent>() {
-                    @Override
-                    public void onSuccess(@NonNull WeatherCurrent weatherCurrent) {
-                        Log.e("DEBUG", weatherCurrent.getTemperature().toString()+"");
-                        Log.e("DEBUG", weatherCurrent.getWind().toString()+"");
-                        Log.e("DEBUG", weatherCurrent.getWeatherPreview().toString()+"");
+        locationList = new ArrayList<>();
 
-                        binding.setTempCurent(weatherCurrent);
-                    }
+        VPAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), getLifecycle(),locationList);
+        binding.vpMain.setAdapter(VPAdapter);
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.e("DEBUG", e.toString());
-                    }
-                });
+//        appDatabase = AppDatabase.getInstance(this);
+//        appDao = appDatabase.contactDao();
 
-        apiService.getWeatherHourlyForecastList()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<WeatherHourlyForecastList>() {
-                    @Override
-                    public void onSuccess(@NonNull WeatherHourlyForecastList list) {
-                        for(int i =7 ; i<32;i++)
-                        {
-                            weatherHourlyForecastList.add(list.getWeatherHourlyForecastList().get(i));
-                            Log.e("DEBUG",list.getWeatherHourlyForecastList().get(i).getWeatherPreviewList().get(0).getIcon());
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
+        add("Hoi An");
+        System.out.println("No "+locationList.toString());
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
 
-                    }
-                });
+    }
+    public void add(String city)
+    {
+        apiService.getLocationByName(city).enqueue(new Callback<List<Location>>() {
+            @Override
+            public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
+                for(Location i : response.body())
+                {
+                    locationList.add(i);
+                    System.out.println(locationList.toString());
+                }
+                VPAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Location>> call, Throwable t) {
+                System.out.println(t.toString());
+            }
+        });
+
     }
 }

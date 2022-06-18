@@ -2,38 +2,21 @@ package com.midterm.weatherapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Wind {
-    @SerializedName("speed")
-    private double speed;
-    @SerializedName("deg")
-    private int deg;
+import java.io.Serializable;
 
-    public Wind(double speed, int deg) {
+public class Wind implements Serializable {
+    @SerializedName("Speed")
+    private Value speed;
+
+    public Wind(Value speed) {
         this.speed = speed;
-        this.deg = deg;
     }
 
-    public double getSpeed() {
+    public Value getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
+    public void setSpeed(Value speed) {
         this.speed = speed;
-    }
-
-    public int getDeg() {
-        return deg;
-    }
-
-    public void setDeg(int deg) {
-        this.deg = deg;
-    }
-
-    @Override
-    public String toString() {
-        return "Wind{" +
-                "speed=" + speed +
-                ", deg=" + deg +
-                '}';
     }
 }

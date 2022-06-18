@@ -4,6 +4,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.midterm.weatherapp.R;
 import com.midterm.weatherapp.model.WeatherHourlyForecast;
-import com.squareup.picasso.Picasso;
+
 
 import java.util.ArrayList;
 
@@ -33,11 +36,12 @@ public class HourlyForecastAdapter extends RecyclerView.Adapter<HourlyForecastAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         WeatherHourlyForecast whf = weatherHourlyForecastList.get(position);
-        holder.textViewTemp.setText(String.valueOf(whf.getTemperature().getTempInt()));
-        holder.textViewTime.setText(whf.getTime().substring(11,16));
-        holder.textViewWind.setText(String.valueOf(whf.getWind().getSpeed())+"km/h");
-        String url = "http://openweathermap.org/img/wn/"+whf.getWeatherPreviewList().get(0).getIcon()+".png";
-        Picasso.get().load(url).into(holder.icon);
+
+        holder.textViewTemp.setText(String.valueOf((int)whf.getTemperature().getValue()));
+        holder.textViewTime.setText(whf.getDateTime().substring(11,16));
+        holder.textViewWind.setText(String.valueOf(whf.getWind().getSpeed().getValue())+whf.getWind().getSpeed().getUnit());
+        holder.icon.setImageResource(R.drawable._01_s);
+
     }
 
     @Override
@@ -50,12 +54,16 @@ public class HourlyForecastAdapter extends RecyclerView.Adapter<HourlyForecastAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textViewTime, textViewTemp, textViewWind;
         private ImageView icon;
+
+        private RelativeLayout rl;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTemp = itemView.findViewById(R.id.tv_temp);
             textViewTime = itemView.findViewById(R.id.tv_time);
             textViewWind = itemView.findViewById(R.id.tv_wind);
-            icon = itemView.findViewById(R.id.iv_icon);
+            icon = itemView.findViewById(R.id.icon);
+
         }
     }
 
