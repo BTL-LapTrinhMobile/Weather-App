@@ -7,7 +7,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_day"
-        android:layout_width="80dp"
+        android:layout_width="110dp"
         android:layout_height="30dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
@@ -20,17 +20,17 @@
         android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="130dp"
         android:text="12-6"
         android:textColor="#C1FFFFFF"
         android:textSize="15dp"></androidx.appcompat.widget.AppCompatTextView>
 
     <ImageView
-        android:id="@+id/iv_icon"
+        android:id="@+id/iv_dlicon"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="160dp"
+        android:layout_marginLeft="180dp"
         android:background="@drawable/_01_s"></ImageView>
 
     <androidx.appcompat.widget.AppCompatTextView

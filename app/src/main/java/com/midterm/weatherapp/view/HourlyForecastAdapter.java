@@ -39,7 +39,8 @@ public class HourlyForecastAdapter extends RecyclerView.Adapter<HourlyForecastAd
         holder.textViewTemp.setText(String.valueOf((int)whf.getTemperature().getValue()));
         holder.textViewTime.setText(whf.getDateTime().substring(11,16));
         holder.textViewWind.setText(String.valueOf(whf.getWind().getSpeed().getValue())+whf.getWind().getSpeed().getUnit());
-        holder.icon.setImageResource(R.drawable._01_s);
+//        holder.icon.setImageResource(R.drawable._01_s);
+
         img_choose(whf.getWeatherIcon(),holder.icon);
 
     }
@@ -62,7 +63,7 @@ public class HourlyForecastAdapter extends RecyclerView.Adapter<HourlyForecastAd
             textViewTemp = itemView.findViewById(R.id.tv_temp);
             textViewTime = itemView.findViewById(R.id.tv_time);
             textViewWind = itemView.findViewById(R.id.tv_wind);
-            icon = itemView.findViewById(R.id.im_icon);
+            icon = itemView.findViewById(R.id.iv_icon);
 
         }
 

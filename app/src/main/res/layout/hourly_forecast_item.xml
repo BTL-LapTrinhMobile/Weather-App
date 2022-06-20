@@ -30,8 +30,8 @@
             android:layout_height="30dp"
             android:layout_below="@+id/tv_time"
             android:layout_centerHorizontal="true"
-            android:textAlignment="textEnd"
             android:text="°C"
+            android:textAlignment="textEnd"
             android:textColor="@color/black"
             android:textSize="15dp"></TextView>
 

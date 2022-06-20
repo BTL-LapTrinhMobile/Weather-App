@@ -14,6 +14,8 @@ public class WeatherDailyForecast implements Serializable {
     @SerializedName("Night")
     private WeatherHourlyForecast night;
 
+
+
     public WeatherDailyForecast() {
     }
 
@@ -22,7 +24,10 @@ public class WeatherDailyForecast implements Serializable {
         this.temperature = temperature;
         this.day = day;
         this.night = night;
+
     }
+
+
 
     public String getDate() {
         return date;
