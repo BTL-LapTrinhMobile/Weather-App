@@ -23,7 +23,6 @@ public class Country implements Serializable {
     }
     public Country(){}
 
-
     @NonNull
     public String getIdCountry() {
         return idCountry;
@@ -47,5 +46,14 @@ public class Country implements Serializable {
 
     public void setEnglishName(String englishName) {
         this.englishName = englishName;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "idCountry='" + idCountry + '\'' +
+                ", localizedName='" + localizedName + '\'' +
+                ", englishName='" + englishName + '\'' +
+                '}';
     }
 }

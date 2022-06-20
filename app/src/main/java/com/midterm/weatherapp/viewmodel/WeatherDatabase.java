@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.DeleteTable;
+import androidx.room.RenameColumn;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
@@ -26,9 +27,9 @@ import com.midterm.weatherapp.model.location.Country;
 import com.midterm.weatherapp.model.location.Location;
 
 @Database(entities = {Location.class}
-        ,version = 10,
+        ,version = 11,
         autoMigrations = {
-                @AutoMigration(from =9, to = 10,spec = WeatherDatabase.MyAutoMigration.class)
+                @AutoMigration(from =10, to = 11,spec = WeatherDatabase.MyAutoMigration.class)
         }, exportSchema = true
 )
 @TypeConverters(Converters.class)
@@ -47,9 +48,6 @@ public abstract class WeatherDatabase extends RoomDatabase {
         return instance;
     }
 
-    @DeleteTable.Entries(value=
-            {@DeleteTable(tableName = "Country")
-            })
 
 
 

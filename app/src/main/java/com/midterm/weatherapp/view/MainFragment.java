@@ -1,7 +1,11 @@
 package com.midterm.weatherapp.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.midterm.weatherapp.R;
 import com.midterm.weatherapp.databinding.FragmentMainBinding;
+import com.midterm.weatherapp.model.Temperature;
 import com.midterm.weatherapp.model.WeatherDailyForecast;
 import com.midterm.weatherapp.model.WeatherDailyForecastList;
 import com.midterm.weatherapp.model.WeatherDailyForecastPreview;
 import com.midterm.weatherapp.model.WeatherHourlyForecast;
 import com.midterm.weatherapp.model.location.Location;
 import com.midterm.weatherapp.viewmodel.ApiService;
+import com.midterm.weatherapp.viewmodel.WeatherDao;
+import com.midterm.weatherapp.viewmodel.WeatherDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +48,13 @@ public class MainFragment extends Fragment {
     private WeatherDailyForecastPreview weatherDailyForecastPreview;
     private FragmentMainBinding binding;
     private Location location;
+    private WeatherDao weatherDao;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            location =(Location) getArguments().getSerializable("LOCATION");
+            location = (Location) getArguments().getSerializable("LOCATION");
             System.out.println(location.getEnglishName());
         }
     }
@@ -53,7 +62,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_main,null, false);
+        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_main, null, false);
         return binding.getRoot();
     }
 
@@ -62,49 +71,42 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         weatherHourlyForecastList = new ArrayList<>();
         adapter = new HourlyForecastAdapter(weatherHourlyForecastList);
-        binding.rcvHourlyForecast.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL,false));
+        binding.rcvHourlyForecast.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         binding.rcvHourlyForecast.setAdapter(adapter);
 
         weatherDailyForecastList = new ArrayList<>();
         dailyAdapter = new DailyForecastAdapter(weatherDailyForecastList);
-        binding.rcvDailyForecast.setLayoutManager( new LinearLayoutManager(getActivity()));
+        binding.rcvDailyForecast.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.rcvDailyForecast.setAdapter(dailyAdapter);
 
-        apiService = new ApiService();
-        getDB(apiService,location.getKey());
+        weatherDao = WeatherDatabase.getInstance(getActivity()).weatherDao();
 
-        binding.btnSearchLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SearchLocationActivity.class);
-                startActivity(intent);
-            }
-        });
+        apiService = new ApiService();
+
+        if (internetIsConnected()) {
+            getDataAPI(weatherDao, apiService, location);
+            Log.e("Check", "connect");
+        } else {
+            getDataRoom(weatherDao,location);
+            Log.e("Check", "disconnect");
+        }
 
     }
-    public void getDB(ApiService apiService,String cityKey){
-//        apiService.getWeatherCurrent(cityKey).enqueue(new Callback<List<WeatherCurrent>>() {
-//            @Override
-//            public void onResponse(Call<List<WeatherCurrent>> call, Response<List<WeatherCurrent>> response) {
-//                WeatherCurrent weatherCurrent = response.body().get(0);
-//                binding.setWeatherCurrent(weatherCurrent);
-//                System.out.println(weatherCurrent.getPressure().getMetric().getValue());
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<WeatherCurrent>> call, Throwable t) {
-//
-//            }
-//        });
 
-        apiService.getWeatherHourlyForecast(cityKey).enqueue(new Callback<List<WeatherHourlyForecast>>() {
+    public void getDataAPI(WeatherDao weatherDao, ApiService apiService, Location location) {
+
+        apiService.getWeatherHourlyForecast(location.getKey()).enqueue(new Callback<List<WeatherHourlyForecast>>() {
             @Override
             public void onResponse(Call<List<WeatherHourlyForecast>> call, Response<List<WeatherHourlyForecast>> response) {
                 binding.imIcon.setImageResource(R.drawable._01_s);
+                ArrayList<WeatherHourlyForecast> hourlyList = (ArrayList<WeatherHourlyForecast>) response.body();
 
-                WeatherHourlyForecast weatherCurrent = response.body().get(0);
+                WeatherHourlyForecast weatherCurrent = hourlyList.get(0);
                 binding.setWeatherNextHour(weatherCurrent);
+
+                location.setWeatherHourlyForecastList(hourlyList);
+                weatherDao.updateLocation(location);
+
                 for (WeatherHourlyForecast i : response.body()) {
                     weatherHourlyForecastList.add(i);
                     adapter.notifyDataSetChanged();
@@ -117,13 +119,17 @@ public class MainFragment extends Fragment {
             }
         });
 
-        apiService.getWeatherDailyForecastList(cityKey).subscribeOn(Schedulers.newThread())
+        apiService.getWeatherDailyForecastList(location.getKey()).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<WeatherDailyForecastList>() {
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull WeatherDailyForecastList list) {
-                        binding.setWeatherDailyForecast(list.getWeatherDailyForecastList().get(0));
-                        for (WeatherDailyForecast i : list.getWeatherDailyForecastList()) {
+                        binding.setWeatherDailyForecast(list.getWeatherDailyForecastArrayList().get(0));
+
+                        location.setWeatherDailyForecastList(list);
+                        weatherDao.updateLocation(location);
+
+                        for (WeatherDailyForecast i : list.getWeatherDailyForecastArrayList()) {
                             weatherDailyForecastList.add(i);
                             dailyAdapter.notifyDataSetChanged();
                         }
@@ -135,20 +141,43 @@ public class MainFragment extends Fragment {
 
                     }
                 });
-//        binding.tvDailyForecastDetail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(weatherDailyForecastList != null)
-//                {
-//                    Intent intent = new Intent(getActivity(), DailyForecastActivity.class);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putSerializable("WEATHER_DAILY_FORECAST_LIST", weatherDailyForecastList);
-//                    bundle.putSerializable("WEATHER_DAILY_FORECAST_PREVIEW", weatherDailyForecastPreview);
-//                    intent.putExtras(bundle);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
     }
 
+    public void getDataRoom(WeatherDao weatherDao, Location location) {
+        if (location.getWeatherHourlyForecastList() != null) {
+            WeatherHourlyForecast weatherCurrent = location.getWeatherHourlyForecastList().get(0);
+            binding.setWeatherNextHour(weatherCurrent);
+            for (WeatherHourlyForecast i : location.getWeatherHourlyForecastList()) {
+                weatherHourlyForecastList.add(i);
+                adapter.notifyDataSetChanged();
+            }
+
+        }
+        if (location.getWeatherDailyForecastList() != null) {
+            binding.setWeatherDailyForecast(location.getWeatherDailyForecastList().getWeatherDailyForecastArrayList().get(0));
+            for (WeatherDailyForecast i : location.getWeatherDailyForecastList().getWeatherDailyForecastArrayList()) {
+                weatherDailyForecastList.add(i);
+                dailyAdapter.notifyDataSetChanged();
+            }
+
+        }
+    }
+
+    public boolean internetIsConnected() {
+        try {
+            ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInto = connectivityManager.getActiveNetworkInfo();
+
+            if (networkInto != null) {
+                if (networkInto.isConnected()) {
+                    return true;
+                }
+                else
+                    return false;
+            }
+            else return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

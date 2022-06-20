@@ -1,19 +1,24 @@
 package com.midterm.weatherapp.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-
 public class Temperature implements Serializable {
+
     @SerializedName("Value")
     private double value;
+
     @SerializedName("Maximum")
     private Value maximumTemperature;
+
     @SerializedName("Minimum")
     private Value minimumTemperature;
 
     public Temperature() {
-
     }
 
     public Temperature(double value, Value maximumTemperature, Value minimumTemperature) {

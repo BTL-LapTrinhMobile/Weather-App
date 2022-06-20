@@ -1,5 +1,6 @@
 package com.midterm.weatherapp.model.location;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -25,7 +26,6 @@ public class AdministrativeArea implements Serializable {
         this.englishName = englishName;
     }
 
-
     public String getIdAdministrativeArea() {
         return idAdministrativeArea;
     }
@@ -48,5 +48,14 @@ public class AdministrativeArea implements Serializable {
 
     public void setEnglishName(String englishName) {
         this.englishName = englishName;
+    }
+
+    @Override
+    public String toString() {
+        return "AdministrativeArea{" +
+                "idAdministrativeArea='" + idAdministrativeArea + '\'' +
+                ", localizedName='" + localizedName + '\'' +
+                ", englishName='" + englishName + '\'' +
+                '}';
     }
 }

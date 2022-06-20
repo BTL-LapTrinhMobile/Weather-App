@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 10,
-    "identityHash": "242a1aa56ff54b839206e5d768b03785",
+    "identityHash": "ec0f518254d90a4a60995b67b7d88076",
     "entities": [
       {
         "tableName": "Location",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `key` TEXT, `type` TEXT, `localizedName` TEXT, `englishName` TEXT, `idAdministrativeArea` TEXT, `idCountry` TEXT, `country` TEXT, `administrativeArea` TEXT, `weatherDailyForecastList` TEXT, `weatherHourlyForecastList` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `key` TEXT, `type` TEXT, `localizedName` TEXT, `englishName` TEXT, `idAdministrativeArea` TEXT, `idCountry` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -49,37 +49,13 @@
             "columnName": "idCountry",
             "affinity": "TEXT",
             "notNull": false
-          },
-          {
-            "fieldPath": "country",
-            "columnName": "country",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "administrativeArea",
-            "columnName": "administrativeArea",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "weatherDailyForecastList",
-            "columnName": "weatherDailyForecastList",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "weatherHourlyForecastList",
-            "columnName": "weatherHourlyForecastList",
-            "affinity": "TEXT",
-            "notNull": false
           }
         ],
         "primaryKey": {
           "columnNames": [
             "id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -88,7 +64,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '242a1aa56ff54b839206e5d768b03785')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ec0f518254d90a4a60995b67b7d88076')"
     ]
   }
 }
