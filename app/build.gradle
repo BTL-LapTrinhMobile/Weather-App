@@ -59,5 +59,10 @@ dependencies {
     implementation "androidx.room:room-rxjava3:$room_version"
     implementation "androidx.room:room-guava:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
-    implementation 'androidx.room:room-paging:2.5.0-alpha02'
+
+    implementation "androidx.room:room-ktx:2.4.2"
+    implementation "androidx.room:room-paging:2.4.2"
+
+    implementation 'androidx.paging:paging-compose:1.0.0-alpha15'
+
 }

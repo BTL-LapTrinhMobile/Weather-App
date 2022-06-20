@@ -44,9 +44,6 @@ public class SearchLocationAdapter extends RecyclerView.Adapter<SearchLocationAd
         holder.layoutSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                appDatabase = AppDatabase.getInstance(context);
-//                appDao = appDatabase.contactDao();
-//                addNewLocation(location);
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(intent);
@@ -71,42 +68,4 @@ public class SearchLocationAdapter extends RecyclerView.Adapter<SearchLocationAd
         }
     }
 
-
-//    public void addNewLocation(Location location)
-//    {
-//        try {
-//            AsyncTask.execute(new Runnable() {
-//                @Override
-//
-//                public void run() {
-//                    try{
-//                        // Kiem tra location trong DB
-//                         if(appDao.getLocationByKey(location.getKey())== null)
-//                         {
-//                             location.setIdAdministrativeArea(location.getAdministrativeArea().getIdAdministrativeArea());
-//                             location.setIdCountry(location.getCountry().getIdCountry());
-//                             // Kiem tra country trong DB
-//                             if(appDao.getCountryByID(location.getIdCountry())==null)
-//                             {
-//                                 appDao.insertAllCountry(location.getCountry());
-//                             }
-//                             //Kiem tra administrative trong DB
-//                             if(appDao.getAdministrativeAreaByID(location.getIdAdministrativeArea())==null)
-//                             {
-//                                 appDao.insertAllAdministrativeArea(location.getAdministrativeArea());
-//                             }
-//                             // Them location vao DB
-//                             appDao.insertAllLocation(location);
-//                         }
-//                    }
-//                    catch (Exception ex)
-//                    {
-//                        Log.e("Exception",ex.toString());
-//                    }
-//                }
-//            });
-//        }
-//        catch (Exception e)
-//        {}
-//    }
 }

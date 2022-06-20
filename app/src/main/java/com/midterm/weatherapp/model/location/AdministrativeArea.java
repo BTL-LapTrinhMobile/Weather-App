@@ -8,10 +8,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 
-@Entity
 public class AdministrativeArea implements Serializable {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
     @SerializedName("ID")
     private String idAdministrativeArea;
     @SerializedName("LocalizedName")
@@ -28,13 +25,6 @@ public class AdministrativeArea implements Serializable {
         this.englishName = englishName;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getIdAdministrativeArea() {
         return idAdministrativeArea;

@@ -10,8 +10,6 @@ import java.io.Serializable;
 
 @Entity
 public class Country implements Serializable {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
     @SerializedName("ID")
     private String idCountry;
     @SerializedName("LocalizedName")
@@ -26,13 +24,6 @@ public class Country implements Serializable {
     }
     public Country(){}
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @NonNull
     public String getIdCountry() {

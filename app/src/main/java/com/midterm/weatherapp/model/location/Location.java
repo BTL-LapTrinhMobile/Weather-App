@@ -9,10 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-@Entity
 public class Location implements Serializable {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
 
     @ColumnInfo
     @SerializedName("Key")
@@ -46,8 +43,7 @@ public class Location implements Serializable {
     public Location() {
     }
 
-    public Location(int id, String key, String type, String localizedName, String englishName, String idAdministrativeArea, String idCountry, Country country, AdministrativeArea administrativeArea) {
-        this.id = id;
+    public Location(String key, String type, String localizedName, String englishName, String idAdministrativeArea, String idCountry, Country country, AdministrativeArea administrativeArea) {
         this.key = key;
         this.type = type;
         this.localizedName = localizedName;
@@ -58,13 +54,6 @@ public class Location implements Serializable {
         this.administrativeArea = administrativeArea;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getKey() {
         return key;
@@ -133,7 +122,6 @@ public class Location implements Serializable {
     @Override
     public String toString() {
         return "Location{" +
-                "id=" + id +
                 ", key='" + key + '\'' +
                 ", type='" + type + '\'' +
                 ", localizedName='" + localizedName + '\'' +
