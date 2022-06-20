@@ -44,6 +44,9 @@ public class ApiService {
                 .create(WeatherApi.class);
     }
 
+    public Call<List<Location>> getLocationByName(String locationName){
+        return locationApi.getLocationByName(locationName);
+    }
 
     public Call<List<WeatherHourlyForecast>> getWeatherHourlyForecast(String cityKey)
     {
@@ -55,9 +58,6 @@ public class ApiService {
         return weatherApi.getWeatherDailyForecastList(cityKey);
     }
 
-    public Call<List<Location>> getLocationByName(String locationName){
-        return locationApi.getLocationByName(locationName);
-    }
 
     public Call<Location> getLocationByLonLat(String locationLonLat){
         return locationApi.getLocationByLonLat(locationLonLat);
