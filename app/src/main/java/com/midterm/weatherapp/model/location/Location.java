@@ -8,9 +8,10 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-
+@Entity
 public class Location implements Serializable {
-
+    @PrimaryKey
+    private int id;
     @ColumnInfo
     @SerializedName("Key")
     private String key;
@@ -54,6 +55,13 @@ public class Location implements Serializable {
         this.administrativeArea = administrativeArea;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getKey() {
         return key;
