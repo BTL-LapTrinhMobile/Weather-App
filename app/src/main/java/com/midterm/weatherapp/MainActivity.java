@@ -1,28 +1,30 @@
 package com.midterm.weatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.midterm.weatherapp.databinding.ActivityMainBinding;
-
+import com.midterm.weatherapp.model.Temperature;
+import com.midterm.weatherapp.model.Value;
+import com.midterm.weatherapp.model.WeatherDailyForecast;
+import com.midterm.weatherapp.model.location.AdministrativeArea;
+import com.midterm.weatherapp.model.location.Country;
 import com.midterm.weatherapp.model.location.Location;
 import com.midterm.weatherapp.view.MainViewPagerAdapter;
-
+import com.midterm.weatherapp.view.SearchLocationActivity;
 import com.midterm.weatherapp.viewmodel.ApiService;
+import com.midterm.weatherapp.viewmodel.WeatherDao;
+import com.midterm.weatherapp.viewmodel.WeatherDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.observers.DisposableSingleObserver;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,12 +32,10 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private ApiService apiService;
     private ActivityMainBinding binding;
-
     private ArrayList<Location> locationList;
     private MainViewPagerAdapter VPAdapter;
-//    private AppDatabase appDatabase;
-//    private AppDao appDao;
-
+    private WeatherDatabase weatherDatabase;
+    private WeatherDao weatherDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,38 +43,43 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        apiService = new ApiService();
+        apiService = ApiService.getInstance();
         locationList = new ArrayList<>();
 
-        VPAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), getLifecycle(),locationList);
-        binding.vpMain.setAdapter(VPAdapter);
-
-//        appDatabase = AppDatabase.getInstance(this);
-//        appDao = appDatabase.contactDao();
-
-        add("Hoi An");
-        System.out.println("No "+locationList.toString());
+        weatherDatabase = WeatherDatabase.getInstance(this);
+        weatherDao = weatherDatabase.weatherDao();
+        locationList = getLocation(weatherDao);
 
 
-    }
-    public void add(String city)
-    {
-        apiService.getLocationByName(city).enqueue(new Callback<List<Location>>() {
+        binding.btnSearchLocation.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
-                for(Location i : response.body())
-                {
-                    locationList.add(i);
-                    System.out.println(locationList.toString());
-                }
-                VPAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<Location>> call, Throwable t) {
-                System.out.println(t.toString());
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SearchLocationActivity.class);
+                startActivity(intent);
             }
         });
 
+        if(locationList != null && !locationList.isEmpty())
+        {
+            VPAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), getLifecycle(),locationList);
+            binding.vpMain.setAdapter(VPAdapter);
+        }
+        else
+        {
+
+
+        }
+
+    }
+
+    public ArrayList<Location> getLocation(WeatherDao weatherDao)
+    {
+        try {
+            return (ArrayList<Location>) weatherDao.getAllLocation();
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 }

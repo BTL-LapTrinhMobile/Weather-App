@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Value implements Serializable {
+
     @SerializedName("Value")
     private Double value;
     @SerializedName("Unit")

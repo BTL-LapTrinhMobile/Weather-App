@@ -6,10 +6,16 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
+import com.midterm.weatherapp.model.WeatherDailyForecastList;
+import com.midterm.weatherapp.model.WeatherHourlyForecast;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
+@Entity
 public class Location implements Serializable {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     @ColumnInfo
     @SerializedName("Key")
@@ -32,18 +38,21 @@ public class Location implements Serializable {
     @ColumnInfo
     private String idCountry;
 
-    @Ignore
     @SerializedName("Country")
     private Country country;
 
-    @Ignore
     @SerializedName("AdministrativeArea")
     private AdministrativeArea administrativeArea;
+
+    private WeatherDailyForecastList weatherDailyForecastList;
+
+    private ArrayList<WeatherHourlyForecast> weatherHourlyForecastList;
+
 
     public Location() {
     }
 
-    public Location(String key, String type, String localizedName, String englishName, String idAdministrativeArea, String idCountry, Country country, AdministrativeArea administrativeArea) {
+    public Location(String key, String type, String localizedName, String englishName, String idAdministrativeArea, String idCountry, Country country, AdministrativeArea administrativeArea, WeatherDailyForecastList weatherDailyForecastList, ArrayList<WeatherHourlyForecast> weatherHourlyForecastList) {
         this.key = key;
         this.type = type;
         this.localizedName = localizedName;
@@ -52,8 +61,17 @@ public class Location implements Serializable {
         this.idCountry = idCountry;
         this.country = country;
         this.administrativeArea = administrativeArea;
+        this.weatherDailyForecastList = weatherDailyForecastList;
+        this.weatherHourlyForecastList = weatherHourlyForecastList;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getKey() {
         return key;
@@ -119,9 +137,26 @@ public class Location implements Serializable {
         this.administrativeArea = administrativeArea;
     }
 
+    public WeatherDailyForecastList getWeatherDailyForecastList() {
+        return weatherDailyForecastList;
+    }
+
+    public void setWeatherDailyForecastList(WeatherDailyForecastList weatherDailyForecastList) {
+        this.weatherDailyForecastList = weatherDailyForecastList;
+    }
+
+    public ArrayList<WeatherHourlyForecast> getWeatherHourlyForecastList() {
+        return weatherHourlyForecastList;
+    }
+
+    public void setWeatherHourlyForecastList(ArrayList<WeatherHourlyForecast> weatherHourlyForecastList) {
+        this.weatherHourlyForecastList = weatherHourlyForecastList;
+    }
+
     @Override
     public String toString() {
         return "Location{" +
+                "id=" + id +
                 ", key='" + key + '\'' +
                 ", type='" + type + '\'' +
                 ", localizedName='" + localizedName + '\'' +
