@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-@Entity
 public class Country implements Serializable {
     @SerializedName("ID")
     private String idCountry;
