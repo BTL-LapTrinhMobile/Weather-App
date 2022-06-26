@@ -1,6 +1,9 @@
 # Weather-App
 # End-Term Mobile Develop
 
+**Screenshot**
+[<img src="https://i.ibb.co/4PyRWSc/Screenshot-20220627-020429.png" width=250>](https://i.ibb.co/4PyRWSc/Screenshot-20220627-020429.png)
+[<img src="https://i.ibb.co/0ydvdkH/Screenshot-20220627-020657.png" width=250>](https://i.ibb.co/0ydvdkH/Screenshot-20220627-020657.png)
 
 **Requirements**
 - Android Studio Last Version
@@ -11,8 +14,6 @@
 **Highlights**
 - Use [OpenWeatherMap] API
 - Use locale Database
-
-**Screenshot**
 
 
 **Libraries & Dependencies**
