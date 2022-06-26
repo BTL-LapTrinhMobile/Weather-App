@@ -29,7 +29,7 @@ import com.midterm.weatherapp.model.location.Location;
 @Database(entities = {Location.class}
         ,version = 11,
         autoMigrations = {
-                @AutoMigration(from =10, to = 11,spec = WeatherDatabase.MyAutoMigration.class)
+                @AutoMigration(from =9, to = 11,spec = WeatherDatabase.MyAutoMigration.class)
         }, exportSchema = true
 )
 @TypeConverters(Converters.class)

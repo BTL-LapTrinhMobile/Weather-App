@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,14 +52,6 @@ public class MainActivity extends AppCompatActivity {
         locationList = getLocation(weatherDao);
 
 
-        binding.btnSearchLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SearchLocationActivity.class);
-                startActivity(intent);
-            }
-        });
-
         if(locationList != null && !locationList.isEmpty())
         {
             VPAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), getLifecycle(),locationList);
@@ -66,10 +59,20 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
+            try {
+                Intent intent = new Intent(MainActivity.this, SearchLocationActivity.class);
+                startActivity(intent);
+            }
+            catch (Exception e)
+            {
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("Check your connected.");
+                builder1.setCancelable(true);
 
-
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+            }
         }
-
     }
 
     public ArrayList<Location> getLocation(WeatherDao weatherDao)

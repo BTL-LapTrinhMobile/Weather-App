@@ -10,12 +10,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         ></androidx.viewpager2.widget.ViewPager2>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_search_location"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/ic_baseline_search_24"></androidx.appcompat.widget.AppCompatButton>
-</RelativeLayout>
+
+    </RelativeLayout>

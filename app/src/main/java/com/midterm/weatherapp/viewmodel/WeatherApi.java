@@ -14,7 +14,8 @@ public interface WeatherApi {
     //Duy xuyen : 425992
     //352954
 //    String CITY_KEY ="425992";
-    String API_KEY ="kXvXHPtOfWFIW4xxP36JPyDW2TqWMkdM";
+    //kXvXHPtOfWFIW4xxP36JPyDW2TqWMkdM
+    String API_KEY ="2DPIYDBmjPDKUfAYBJBHQoruQqqgeGXU";
 
 
     @GET("/forecasts/v1/hourly/12hour/{key}?apikey="+API_KEY+"&language=vi&details=true&metric=true")
