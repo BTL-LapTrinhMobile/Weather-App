@@ -2,8 +2,10 @@
 # End-Term Mobile Develop
 
 **Screenshot**
+
 [<img src="https://i.ibb.co/4PyRWSc/Screenshot-20220627-020429.png" width=250>](https://i.ibb.co/4PyRWSc/Screenshot-20220627-020429.png)
 [<img src="https://i.ibb.co/0ydvdkH/Screenshot-20220627-020657.png" width=250>](https://i.ibb.co/0ydvdkH/Screenshot-20220627-020657.png)
+[<img src="https://i.ibb.co/St68qck/Screenshot-20220627-031454.png" width=250>](https://i.ibb.co/St68qck/Screenshot-20220627-031454.png)
 
 **Requirements**
 - Android Studio Last Version
@@ -12,7 +14,7 @@
 - Supports API Level +21
 
 **Highlights**
-- Use [OpenWeatherMap] API
+- Use [AccuWeather] API
 - Use locale Database
 
 
@@ -22,7 +24,7 @@
 - [RxAndroid]
 
 ## API's Used
-- [OpenWeatherMap](https://openweathermap.org/api)
+- [AccuWeather]([https://openweathermap.org/api](https://developer.accuweather.com/))
 
 ## My Team
 * [Ngô Lê Gia Hưng ](https://www.facebook.com/Ryn.super)
