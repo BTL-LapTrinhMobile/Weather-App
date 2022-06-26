@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.google.gson.annotations.SerializedName;
+import com.midterm.weatherapp.R;
 
 import java.io.Serializable;
 
@@ -45,6 +46,8 @@ public class WeatherHourlyForecast implements Serializable {
     private Value ice;
     @SerializedName("CloudCover")
     private int cloudCover;
+
+
 
     public WeatherHourlyForecast() {
     }
@@ -237,4 +240,58 @@ public class WeatherHourlyForecast implements Serializable {
                 '}';
     }
 
+    public int convertIcon(int iconNumber)
+    {
+        switch (iconNumber)
+        {
+            case 1:
+            case 2:
+            case 3:
+                return R.drawable.weather_icon_123;
+            case 4:
+            case 5:
+            case 6:
+            case 20:
+            case 21:
+            case 23:
+                return R.drawable.weather_icon_4_5_6_20_21_23;
+            default:
+            case 7:
+            case 11:
+                return R.drawable.weather_icon_7_11;
+            case 8:
+            case 19:
+            case 22:
+            case 24:
+                return R.drawable.weather_icon_8_19_22_24;
+            case 12_43_44:
+                return R.drawable.weather_icon_12_43_44;
+            case 13:
+            case 14:
+                return R.drawable.weather_icon_13_14;
+            case 15:
+                return R.drawable.weather_icon_15;
+            case 16:
+            case 17:
+                return R.drawable.weather_icon_16_17;
+            case 18:
+                return R.drawable.weather_icon_18_25_26_29;
+            case 33:
+            case 34:
+            case 35:
+                return R.drawable.weather_icon_33_34_35;
+            case 36:
+            case 37:
+            case 38:
+                return R.drawable.weather_icon_36_37_38;
+            case 39:
+                return R.drawable.weather_icon_39;
+            case 40:
+                return R.drawable.weather_icon_40;
+            case 41:
+            case 42:
+                return R.drawable.weather_icon_41_42;
+
+        }
+    }
 }

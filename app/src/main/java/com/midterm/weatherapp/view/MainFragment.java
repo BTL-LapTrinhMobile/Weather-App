@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.midterm.weatherapp.MainActivity;
 import com.midterm.weatherapp.R;
 import com.midterm.weatherapp.databinding.FragmentMainBinding;
 import com.midterm.weatherapp.model.Temperature;
@@ -91,18 +92,29 @@ public class MainFragment extends Fragment {
             Log.e("Check", "disconnect");
         }
 
+        binding.tvCityName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SearchLocationActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void getDataAPI(WeatherDao weatherDao, ApiService apiService, Location location) {
 
+        String cityName = location.getLocalizedName()+", "+location.getCountry().getIdCountry();
+        binding.tvCityName.setText(cityName);
         apiService.getWeatherHourlyForecast(location.getKey()).enqueue(new Callback<List<WeatherHourlyForecast>>() {
             @Override
             public void onResponse(Call<List<WeatherHourlyForecast>> call, Response<List<WeatherHourlyForecast>> response) {
-                binding.imIcon.setImageResource(R.drawable._01_s);
+
                 ArrayList<WeatherHourlyForecast> hourlyList = (ArrayList<WeatherHourlyForecast>) response.body();
 
                 WeatherHourlyForecast weatherCurrent = hourlyList.get(0);
                 binding.setWeatherNextHour(weatherCurrent);
+                binding.imIcon.setImageResource(weatherCurrent.convertIcon(weatherCurrent.getWeatherIcon()));
 
                 location.setWeatherHourlyForecastList(hourlyList);
                 weatherDao.updateLocation(location);
@@ -144,9 +156,12 @@ public class MainFragment extends Fragment {
     }
 
     public void getDataRoom(WeatherDao weatherDao, Location location) {
+        String cityName = location.getLocalizedName()+", "+location.getCountry().getIdCountry();
+        binding.tvCityName.setText(cityName);
         if (location.getWeatherHourlyForecastList() != null) {
             WeatherHourlyForecast weatherCurrent = location.getWeatherHourlyForecastList().get(0);
             binding.setWeatherNextHour(weatherCurrent);
+            binding.imIcon.setImageResource(weatherCurrent.convertIcon(weatherCurrent.getWeatherIcon()));
             for (WeatherHourlyForecast i : location.getWeatherHourlyForecastList()) {
                 weatherHourlyForecastList.add(i);
                 adapter.notifyDataSetChanged();
