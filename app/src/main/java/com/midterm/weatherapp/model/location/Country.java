@@ -8,10 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-@Entity
 public class Country implements Serializable {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
     @SerializedName("ID")
     private String idCountry;
     @SerializedName("LocalizedName")
@@ -25,14 +22,6 @@ public class Country implements Serializable {
         this.englishName = englishName;
     }
     public Country(){}
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @NonNull
     public String getIdCountry() {
@@ -57,5 +46,14 @@ public class Country implements Serializable {
 
     public void setEnglishName(String englishName) {
         this.englishName = englishName;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "idCountry='" + idCountry + '\'' +
+                ", localizedName='" + localizedName + '\'' +
+                ", englishName='" + englishName + '\'' +
+                '}';
     }
 }

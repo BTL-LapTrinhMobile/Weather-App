@@ -60,4 +60,14 @@ public class WeatherDailyForecast implements Serializable {
     public void setNight(WeatherHourlyForecast night) {
         this.night = night;
     }
+
+    @Override
+    public String toString() {
+        return "WeatherDailyForecast{" +
+                "date='" + date + '\'' +
+                ", temperature=" + temperature +
+                ", day=" + day +
+                ", night=" + night +
+                '}';
+    }
 }

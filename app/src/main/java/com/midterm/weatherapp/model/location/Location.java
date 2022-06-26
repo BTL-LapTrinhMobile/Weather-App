@@ -6,8 +6,11 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
+import com.midterm.weatherapp.model.WeatherDailyForecastList;
+import com.midterm.weatherapp.model.WeatherHourlyForecast;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @Entity
 public class Location implements Serializable {
@@ -35,19 +38,21 @@ public class Location implements Serializable {
     @ColumnInfo
     private String idCountry;
 
-    @Ignore
     @SerializedName("Country")
     private Country country;
 
-    @Ignore
     @SerializedName("AdministrativeArea")
     private AdministrativeArea administrativeArea;
+
+    private WeatherDailyForecastList weatherDailyForecastList;
+
+    private ArrayList<WeatherHourlyForecast> weatherHourlyForecastList;
+
 
     public Location() {
     }
 
-    public Location(int id, String key, String type, String localizedName, String englishName, String idAdministrativeArea, String idCountry, Country country, AdministrativeArea administrativeArea) {
-        this.id = id;
+    public Location(String key, String type, String localizedName, String englishName, String idAdministrativeArea, String idCountry, Country country, AdministrativeArea administrativeArea, WeatherDailyForecastList weatherDailyForecastList, ArrayList<WeatherHourlyForecast> weatherHourlyForecastList) {
         this.key = key;
         this.type = type;
         this.localizedName = localizedName;
@@ -56,6 +61,8 @@ public class Location implements Serializable {
         this.idCountry = idCountry;
         this.country = country;
         this.administrativeArea = administrativeArea;
+        this.weatherDailyForecastList = weatherDailyForecastList;
+        this.weatherHourlyForecastList = weatherHourlyForecastList;
     }
 
     public int getId() {
@@ -128,6 +135,22 @@ public class Location implements Serializable {
 
     public void setAdministrativeArea(AdministrativeArea administrativeArea) {
         this.administrativeArea = administrativeArea;
+    }
+
+    public WeatherDailyForecastList getWeatherDailyForecastList() {
+        return weatherDailyForecastList;
+    }
+
+    public void setWeatherDailyForecastList(WeatherDailyForecastList weatherDailyForecastList) {
+        this.weatherDailyForecastList = weatherDailyForecastList;
+    }
+
+    public ArrayList<WeatherHourlyForecast> getWeatherHourlyForecastList() {
+        return weatherHourlyForecastList;
+    }
+
+    public void setWeatherHourlyForecastList(ArrayList<WeatherHourlyForecast> weatherHourlyForecastList) {
+        this.weatherHourlyForecastList = weatherHourlyForecastList;
     }
 
     @Override

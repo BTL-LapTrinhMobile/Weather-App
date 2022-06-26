@@ -1,5 +1,9 @@
 package com.midterm.weatherapp.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -11,6 +15,8 @@ public class WeatherHourlyForecast implements Serializable {
     private int weatherIcon;
     @SerializedName("IconPhrase")
     private String iconPhrase;
+    @SerializedName("Icon")
+    private int icon;
     @SerializedName("Temperature")
     private Temperature temperature;
     @SerializedName("RealFeelTemperature")
@@ -43,10 +49,11 @@ public class WeatherHourlyForecast implements Serializable {
     public WeatherHourlyForecast() {
     }
 
-    public WeatherHourlyForecast(String dateTime, int weatherIcon, String iconPhrase, Temperature temperature, Value feelTemperature, Wind wind, int humidity, Value visibility, String uv, int rainProbability, int thunderstormProbability, int snowProbability, int iceProbability, Value rain, Value snow, Value ice, int cloudCover) {
+    public WeatherHourlyForecast(String dateTime, int weatherIcon, String iconPhrase, int icon, Temperature temperature, Value feelTemperature, Wind wind, int humidity, Value visibility, String uv, int rainProbability, int thunderstormProbability, int snowProbability, int iceProbability, Value rain, Value snow, Value ice, int cloudCover) {
         this.dateTime = dateTime;
         this.weatherIcon = weatherIcon;
         this.iconPhrase = iconPhrase;
+        this.icon = icon;
         this.temperature = temperature;
         this.feelTemperature = feelTemperature;
         this.wind = wind;
@@ -61,6 +68,14 @@ public class WeatherHourlyForecast implements Serializable {
         this.snow = snow;
         this.ice = ice;
         this.cloudCover = cloudCover;
+    }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
     }
 
     public String getDateTime() {

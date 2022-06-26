@@ -16,6 +16,17 @@ public class ApiService {
     private static final String BASE_URL="http://dataservice.accuweather.com";
     private WeatherApi weatherApi;
     private LocationApi locationApi;
+
+    private static ApiService instance;
+    public static ApiService getInstance()
+    {
+        if(instance == null)
+        {
+            instance =new ApiService();
+        }
+        return instance;
+    }
+
     public ApiService()
     {
         locationApi = new Retrofit.Builder()
@@ -25,16 +36,17 @@ public class ApiService {
                 .build()
                 .create(LocationApi.class);
 
-
         weatherApi = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build()
                 .create(WeatherApi.class);
-
     }
 
+    public Call<List<Location>> getLocationByName(String locationName){
+        return locationApi.getLocationByName(locationName);
+    }
 
     public Call<List<WeatherHourlyForecast>> getWeatherHourlyForecast(String cityKey)
     {
@@ -46,9 +58,6 @@ public class ApiService {
         return weatherApi.getWeatherDailyForecastList(cityKey);
     }
 
-    public Call<List<Location>> getLocationByName(String locationName){
-        return locationApi.getLocationByName(locationName);
-    }
 
     public Call<Location> getLocationByLonLat(String locationLonLat){
         return locationApi.getLocationByLonLat(locationLonLat);

@@ -1,5 +1,6 @@
 package com.midterm.weatherapp.model.location;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,10 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 
-@Entity
 public class AdministrativeArea implements Serializable {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
     @SerializedName("ID")
     private String idAdministrativeArea;
     @SerializedName("LocalizedName")
@@ -26,14 +24,6 @@ public class AdministrativeArea implements Serializable {
         this.idAdministrativeArea = idAdministrativeArea;
         this.localizedName = localizedName;
         this.englishName = englishName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getIdAdministrativeArea() {
@@ -58,5 +48,14 @@ public class AdministrativeArea implements Serializable {
 
     public void setEnglishName(String englishName) {
         this.englishName = englishName;
+    }
+
+    @Override
+    public String toString() {
+        return "AdministrativeArea{" +
+                "idAdministrativeArea='" + idAdministrativeArea + '\'' +
+                ", localizedName='" + localizedName + '\'' +
+                ", englishName='" + englishName + '\'' +
+                '}';
     }
 }

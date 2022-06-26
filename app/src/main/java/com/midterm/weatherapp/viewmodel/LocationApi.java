@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface LocationApi {
 
-    String API_KEY ="lUTlHCnOIpNxxy5CdHOupBrE2c8vFIQq";
+    String API_KEY ="kXvXHPtOfWFIW4xxP36JPyDW2TqWMkdM";
 
     @GET("/locations/v1/cities/autocomplete?apikey="+API_KEY)
     public Call<List<Location>> getLocationByName(@Query("q") String locationName);
