@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.DailyForecastActivity">
+    <data>
+        <variable
+            name="weatherDailyForecastPreview"
+            type="com.midterm.weatherapp.model.WeatherDailyForecastPreview" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#51A2D5">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_city_name"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20dp"></androidx.appcompat.widget.AppCompatTextView>
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_daily_forecast"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"></androidx.viewpager2.widget.ViewPager2>
+    </RelativeLayout>
+
+</layout>

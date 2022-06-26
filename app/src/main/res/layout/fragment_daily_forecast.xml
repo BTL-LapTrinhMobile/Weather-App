@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.DailyForecastFragment">
+    <data>
+        <variable
+            name="weatherDailyForecast"
+            type="com.midterm.weatherapp.model.WeatherDailyForecast" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#51A2D5">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/l_main_day"
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="Ngày"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatTextView>
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_below="@id/tv_date"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="2dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginBottom="20dp"
+                    android:layout_centerHorizontal="true"/>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/line"
+                    android:text="Ngày"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatTextView>
+
+                <RelativeLayout
+                    android:id="@+id/rl_1"
+                    android:layout_below="@id/tv_day"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="200dp"
+                    android:layout_height="120dp"
+                    >
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_temp"
+                        android:layout_width="100dp"
+                        android:layout_height="120dp"
+                        android:textAlignment="textStart"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="12dp"
+                        android:textColor="@color/white"
+                        android:text="@{String.valueOf((int)weatherDailyForecast.temperature.maximumTemperature.value)}"
+                        android:textSize="70sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="112dp"
+                        android:layout_height="120dp"
+                        android:layout_alignParentRight="true"
+                        android:text="º"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <ImageView
+                        android:id="@+id/icon_day"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"></ImageView>
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/rl_1"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15dp"
+                    android:text="@{weatherDailyForecast.day.iconPhrase}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    ></TextView>
+
+                <TextView
+                    android:id="@+id/label_rain"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/tv_review"
+                    android:layout_marginLeft="20dp"
+                    android:text="Xác có suất mưa"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></TextView>
+                <TextView
+                    android:id="@+id/tv_rain"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_review"
+                    android:layout_marginRight="20dp"
+                    android:text="@{weatherDailyForecast.day.rainProbability+` %`}"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    ></TextView>
+                <View
+                    android:layout_below="@id/label_rain"
+                    android:layout_width="370dp"
+                    android:layout_height="2dp"
+                    android:background="#FFFFFF"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:id="@+id/label_hum"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/label_rain"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Xác suất có giông"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></TextView>
+                <TextView
+                    android:id="@+id/tv_hum"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/label_rain"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@{weatherDailyForecast.day.thunderstormProbability+` %`}"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    ></TextView>
+                <View
+                    android:layout_below="@id/label_hum"
+                    android:layout_width="370dp"
+                    android:layout_height="2dp"
+                    android:background="#FFFFFF"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:id="@+id/label_wind"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/label_hum"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Gió"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_wind"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/label_hum"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+
+                    android:text="@{weatherDailyForecast.day.wind.speed.value+` km/h`}"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
+
+                <View
+                    android:layout_width="370dp"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/label_wind"
+                    android:layout_centerHorizontal="true"
+                    android:background="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/label_cloud"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/label_wind"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Mây"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></TextView>
+                <TextView
+                    android:id="@+id/tv_cloud"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/label_wind"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@{weatherDailyForecast.day.cloudCover+` %`}"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    ></TextView>
+
+                <View
+                    android:layout_width="370dp"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/label_cloud"
+                    android:layout_centerHorizontal="true"
+                    android:background="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/label_uv"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/label_cloud"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Xác suất có tuyết"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></TextView>
+                <TextView
+                    android:id="@+id/tv_uv"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/label_cloud"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@{weatherDailyForecast.day.snowProbability+` %`}"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    ></TextView>
+
+                <View
+                    android:layout_below="@id/label_uv"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginTop="17dp"
+                    android:layout_centerHorizontal="true"/>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginTop="500dp"
+                android:layout_width="match_parent"
+                android:layout_height="400dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_night"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="Đêm"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"></androidx.appcompat.widget.AppCompatTextView>
+
+                <RelativeLayout
+                    android:id="@+id/rl_2"
+                    android:layout_below="@id/tv_night"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="200dp"
+                    android:layout_height="120dp"
+                    >
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_temp2"
+                        android:layout_width="100dp"
+                        android:layout_height="120dp"
+                        android:textAlignment="textStart"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="12dp"
+                        android:textColor="@color/white"
+                        android:text="@{String.valueOf((int)weatherDailyForecast.temperature.minimumTemperature.value)}"
+                        android:textSize="70sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="112dp"
+                        android:layout_height="120dp"
+                        android:layout_alignParentRight="true"
+                        android:text="º"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"></androidx.appcompat.widget.AppCompatTextView>
+
+                    <ImageView
+                        android:id="@+id/icon_night"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"></ImageView>
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_review2"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/rl_2"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15dp"
+                    android:text="@{weatherDailyForecast.night.iconPhrase}"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    ></TextView>
+
+                <TextView
+                    android:id="@+id/label_rain2"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/tv_review2"
+                    android:textSize="15dp"
+                    android:text="Xác suất mưa"
+                    android:layout_marginLeft="20dp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/tv_rain2"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tv_review2"
+                    android:layout_marginRight="20dp"
+                    android:text="@{weatherDailyForecast.night.rainProbability+` %`}"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    ></TextView>
+
+                <View
+                    android:layout_width="370dp"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/label_rain2"
+                    android:layout_centerHorizontal="true"
+                    android:background="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/label_hum2"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/label_rain2"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Xác suất có giông"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></TextView>
+                <TextView
+                    android:id="@+id/tv_hum2"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/label_rain2"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@{weatherDailyForecast.night.thunderstormProbability+` %`}"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    ></TextView>
+                <View
+                    android:layout_below="@id/label_hum2"
+                    android:layout_width="370dp"
+                    android:layout_height="2dp"
+                    android:background="#FFFFFF"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:id="@+id/label_wind2"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/label_hum2"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Gió"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_wind2"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/label_hum2"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+
+                    android:text="@{weatherDailyForecast.night.wind.speed.value+` km/h`}"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
+                <View
+                    android:layout_below="@id/label_wind2"
+                    android:layout_width="370dp"
+                    android:layout_height="2dp"
+                    android:background="#FFFFFF"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:id="@+id/label_cloud2"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/label_wind2"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Mây"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></TextView>
+                <TextView
+                    android:id="@+id/tv_cloud2"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/label_wind2"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@{weatherDailyForecast.night.cloudCover+` %`}"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    ></TextView>
+                <View
+                    android:layout_below="@id/label_cloud2"
+                    android:layout_width="370dp"
+                    android:layout_height="2dp"
+                    android:background="#FFFFFF"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:id="@+id/label_uv2"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/label_cloud2"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Xác suất có tuyết"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"></TextView>
+                <TextView
+                    android:id="@+id/tv_uv2"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/label_cloud2"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@{weatherDailyForecast.night.snowProbability+` %`}"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white"
+                    ></TextView>
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</layout>

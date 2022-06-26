@@ -100,6 +100,27 @@ public class MainFragment extends Fragment {
             }
         });
 
+        binding.tvDailyForecastDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                Intent intent = new Intent(getActivity(), SearchLocationActivity.class);
+//                startActivity(intent);
+                Log.e("ERROR",location.getWeatherDailyForecastList().getWeatherDailyForecastArrayList().get(0).toString());
+                if(weatherDailyForecastList != null)
+                {
+                    Intent intent = new Intent(getActivity(), DailyForecastActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("WEATHER_DAILY_FORECAST_LIST", weatherDailyForecastList);
+                    bundle.putSerializable("WEATHER_DAILY_FORECAST_PREVIEW", weatherDailyForecastPreview);
+                    bundle.putSerializable("LOCATION", location);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
     }
 
     public void getDataAPI(WeatherDao weatherDao, ApiService apiService, Location location) {

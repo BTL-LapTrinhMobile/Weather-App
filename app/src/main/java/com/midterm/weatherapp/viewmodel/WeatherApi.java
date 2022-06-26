@@ -15,7 +15,7 @@ public interface WeatherApi {
     //352954
 //    String CITY_KEY ="425992";
     //kXvXHPtOfWFIW4xxP36JPyDW2TqWMkdM
-    String API_KEY ="2DPIYDBmjPDKUfAYBJBHQoruQqqgeGXU";
+    String API_KEY ="AFHxB2jTgF5QbRwBs5VS9EU7cnvcKXwi";
 
 
     @GET("/forecasts/v1/hourly/12hour/{key}?apikey="+API_KEY+"&language=vi&details=true&metric=true")
