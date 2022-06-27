@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="40dp"
     android:id="@+id/layout_search_item">
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_location"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="15dp"
-        android:textAlignment="textStart"
-        android:layout_marginLeft="10dp"
-        android:textSize="18dp"
-        android:textColor="@color/black"></androidx.appcompat.widget.AppCompatTextView>
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_location"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="15dp"></androidx.appcompat.widget.AppCompatTextView>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="#959595" />
+    </RelativeLayout>
+
 
 </LinearLayout>

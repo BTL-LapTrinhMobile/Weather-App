@@ -11,11 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface WeatherApi {
-    //Duy xuyen : 425992
-    //352954
-//    String CITY_KEY ="425992";
-    //kXvXHPtOfWFIW4xxP36JPyDW2TqWMkdM
-    String API_KEY ="AFHxB2jTgF5QbRwBs5VS9EU7cnvcKXwi";
+    String API_KEY ="qGaBGMaAYXF5GWA1nUdjF5Bg1Zm7OnKl";
 
 
     @GET("/forecasts/v1/hourly/12hour/{key}?apikey="+API_KEY+"&language=vi&details=true&metric=true")
