@@ -1,6 +1,9 @@
 package com.midterm.weatherapp.view;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,10 +62,20 @@ public class SearchLocationAdapter extends RecyclerView.Adapter<SearchLocationAd
                 }
                 else
                 {
+                    Toast.makeText(context, "Địa điểm đã tồn tại", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     context.startActivity(intent);
                 }
+            }
+        });
+        holder.layoutSearch.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if(!checkNewLocation(weatherDao,location.getKey())) {
+                    deleteLocation(weatherDao, location);
+                }
+                return false;
             }
         });
     }
@@ -107,10 +121,47 @@ public class SearchLocationAdapter extends RecyclerView.Adapter<SearchLocationAd
     {
         try{
             weatherDao.insertLocation(location);
+            Toast.makeText(context, "Thêm thành công", Toast.LENGTH_SHORT).show();
         }
         catch (Exception e)
         {
-            Log.e("DEBUG_DB_LOCATION", "addNewLocation ERROR"+e);
+            Toast.makeText(context, "Thêm thất bại", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void deleteLocation(WeatherDao weatherDao, Location location)
+    {
+        try{
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+            builder1.setMessage("Bạn chắc chắn muốn xóa vị trí này?");
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Xóa",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            weatherDao.deleteLocation(location);
+                            Intent intent = new Intent(context, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            context.startActivity(intent);
+                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "Hủy",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(context, "Thêm thất bại", Toast.LENGTH_SHORT).show();
         }
     }
 
